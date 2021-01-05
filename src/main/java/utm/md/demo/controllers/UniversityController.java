@@ -43,4 +43,14 @@ public class UniversityController {
     public void saveUniversity(@RequestBody University university){
        universityRepository.saveUniversity(university);
     }
+
+    @PutMapping("/update/{universityId}")
+    public void update(@PathVariable Long universityId, @RequestBody University university){
+       universityRepository.update(universityId, university);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete (@PathVariable Long id){
+       universityRepository.delete(id);
+    }
 }

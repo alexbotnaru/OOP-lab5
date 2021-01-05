@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import utm.md.demo.entity.Student;
+import utm.md.demo.entity.StudentDetails;
 
 import java.util.List;
 
@@ -101,6 +102,25 @@ public class StudentRepository {
 
     public void delete(Long studentId){
         jdbcTemplate.update("DELETE FROM students WHERE studentId = ?",studentId);
+    }
+
+
+    public StudentDetails findByIdDetailed(long studentid) {
+        StudentDetails studentDetails = jdbcTemplate.queryForObject("SELECT students.studentid,name,surname,studentAdress,grade,country,universities.universityname,universities.adress,nrstudents FROM students\n" +
+                        "    inner join universities\n" +
+                        "        on students.universityId = universities.universityid WHERE studentid = ?",
+                new Object[]{studentid},
+                (response, rowNumber) ->
+                        new StudentDetails(response.getLong("studentid"),
+                                response.getString("name"),
+                                response.getString("surname"),
+                                response.getString("studentadress"),
+                                response.getFloat("grade"),
+                                response.getString("country"),
+                                response.getString("universityname"),
+                                response.getString("adress"),
+                                response.getInt("nrStudents")));
+        return studentDetails;
     }
 }
 

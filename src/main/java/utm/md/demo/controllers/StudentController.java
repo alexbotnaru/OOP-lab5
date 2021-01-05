@@ -3,6 +3,7 @@ package utm.md.demo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utm.md.demo.entity.Student;
+import utm.md.demo.entity.StudentDetails;
 import utm.md.demo.repository.StudentRepository;
 
 import java.util.ArrayList;
@@ -78,4 +79,9 @@ public class StudentController {
         studentRepository.delete(id);
     }
 
+    @GetMapping("/more detailed/{studentid}")
+    public StudentDetails findByIdDetailed(@PathVariable Long studentid){
+        StudentDetails studentDetails = studentRepository.findByIdDetailed(studentid);
+        return studentDetails;
+    }
 }

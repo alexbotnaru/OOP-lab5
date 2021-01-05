@@ -71,4 +71,13 @@ public class UniversityRepository {
         jdbcTemplate.update("INSERT INTO universities(universityId, universityName, nrStudents, city, adress,country)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?);",university.getId(),university.getName(), university.getNrStudents(),university.getCity(),university.getAdress(),university.getCountry());
     }
+
+    public void update(Long universityId, University university){
+        jdbcTemplate.update("UPDATE universities SET universityName = ?, nrStudents = ?, city = ?, adress = ?, universitycountry = ? WHERE universityId = ? ",
+                university.getName(), university.getNrStudents(), university.getCity(), university.getAdress(),university.getCountry(),universityId);
+    }
+
+    public void delete(Long universityId){
+        jdbcTemplate.update("DELETE FROM universities WHERE universityId = ?",universityId);
+    }
 }
