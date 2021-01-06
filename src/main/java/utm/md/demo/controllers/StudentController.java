@@ -79,9 +79,14 @@ public class StudentController {
         studentRepository.delete(id);
     }
 
-    @GetMapping("/more detailed/{studentid}")
+    @GetMapping("/moreDetails/{studentid}")
     public StudentDetails findByIdDetailed(@PathVariable Long studentid){
         StudentDetails studentDetails = studentRepository.findByIdDetailed(studentid);
         return studentDetails;
+    }
+
+    @PatchMapping("/updateGradeAndAddress/{id}")
+    public void updateGradeAndAddress (@PathVariable Long id ,@RequestParam float grade, @RequestParam String adress){
+        studentRepository.updateGradeAndAdress(id, grade, adress);
     }
 }

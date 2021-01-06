@@ -37,7 +37,9 @@ public class TeacherController {
         teacherRepository.delete(id);
     }
 
-    @PatchMapping("/patch/{id}")
-    public void patch(@PathVariable Long id){}
+    @PatchMapping("/update email/{id}/{email}")
+    public void updateEmail(@PathVariable Long id, @PathVariable String email ){
+        teacherRepository.updateEmail(id , email);
+    }
 
 }

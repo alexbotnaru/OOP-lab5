@@ -53,4 +53,9 @@ public class UniversityController {
     public void delete (@PathVariable Long id){
        universityRepository.delete(id);
     }
+
+    @PatchMapping("/updateNrStudents/{id}")
+    public void updateNrStudents (@PathVariable Long id ,@RequestParam Integer nrStudents){
+        universityRepository.updateNrStudents(id, nrStudents);
+    }
 }

@@ -22,7 +22,7 @@ public class UniversityRepository {
                                 response.getInt("nrstudents"),
                                 response.getString("city"),
                                 response.getString("adress"),
-                                response.getString("country")));
+                                response.getString("universitycountry")));
         return universityList;
     }
 
@@ -35,7 +35,7 @@ public class UniversityRepository {
                         response.getInt("nrstudents"),
                         response.getString("city"),
                         response.getString("adress"),
-                        response.getString("country")));
+                        response.getString("universitycountry")));
         return university;
     }
 
@@ -49,7 +49,7 @@ public class UniversityRepository {
                                 response.getInt("nrstudents"),
                                 response.getString("city"),
                                 response.getString("adress"),
-                                response.getString("country")));
+                                response.getString("universitycountry")));
         return universityList;
     }
 
@@ -63,12 +63,12 @@ public class UniversityRepository {
                                 response.getInt("nrstudents"),
                                 response.getString("city"),
                                 response.getString("adress"),
-                                response.getString("country")));
+                                response.getString("universitycountry")));
         return universityList;
     }
 
     public void saveUniversity(University university){
-        jdbcTemplate.update("INSERT INTO universities(universityId, universityName, nrStudents, city, adress,country)\n" +
+        jdbcTemplate.update("INSERT INTO universities(universityId, universityName, nrStudents, city, adress,universitycountry)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?);",university.getId(),university.getName(), university.getNrStudents(),university.getCity(),university.getAdress(),university.getCountry());
     }
 
@@ -79,5 +79,9 @@ public class UniversityRepository {
 
     public void delete(Long universityId){
         jdbcTemplate.update("DELETE FROM universities WHERE universityId = ?",universityId);
+    }
+
+    public void updateNrStudents(Long id, Integer nrStudents){
+        jdbcTemplate.update("UPDATE universities SET nrstudents = ? WHERE universityid = ?", nrStudents, id);
     }
 }

@@ -106,7 +106,7 @@ public class StudentRepository {
 
 
     public StudentDetails findByIdDetailed(long studentid) {
-        StudentDetails studentDetails = jdbcTemplate.queryForObject("SELECT students.studentid,name,surname,studentAdress,grade,country,universities.universityname,universities.adress,nrstudents FROM students\n" +
+        StudentDetails studentDetails = jdbcTemplate.queryForObject("SELECT students.studentid,name,surname,studentadress,grade,country,universities.universityname,universities.adress,nrstudents FROM students\n" +
                         "    inner join universities\n" +
                         "        on students.universityId = universities.universityid WHERE studentid = ?",
                 new Object[]{studentid},
@@ -119,8 +119,12 @@ public class StudentRepository {
                                 response.getString("country"),
                                 response.getString("universityname"),
                                 response.getString("adress"),
-                                response.getInt("nrStudents")));
+                                response.getInt("nrstudents")));
         return studentDetails;
+    }
+
+    public void updateGradeAndAdress(Long id, float grade, String adress){
+        jdbcTemplate.update("UPDATE students SET grade = ?, studentadress = ? WHERE studentid = ?", grade,adress,id);
     }
 }
 

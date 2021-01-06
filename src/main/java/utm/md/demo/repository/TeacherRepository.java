@@ -44,6 +44,10 @@ public class TeacherRepository {
     public void delete(Long teacherId){
         jdbcTemplate.update("DELETE FROM teachers WHERE teacherId = ?",teacherId);
     }
+
+    public void updateEmail(Long id, String email){
+        jdbcTemplate.update("UPDATE teachers SET email = ? WHERE teacherid = ?", email,id);
+    }
 }
 
 
